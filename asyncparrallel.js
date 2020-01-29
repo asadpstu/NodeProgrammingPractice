@@ -1,6 +1,8 @@
 const async = require('async');
 const file  = require('fs');
 
+var MongoClient = require('mongodb').MongoClient;
+
 var getResult = function(req,res){
     async.parallel([
         function(callback){
@@ -24,8 +26,23 @@ var getResult = function(req,res){
             
         },
         function(callback){
-            var result = "Third Function";
-            callback(null,result)
+            MongoClient.connect("mongodb://192.168.120.11:27017", function(err, db) {
+                if (err) throw err;
+                var dbo = db.db("sdgt_EHR_QA");
+                dbo.collection("User").count({}, function(err, count) {
+                    const amount_documents = count;
+                    var data = {
+                        "function" : "Third Function",
+                        "count" : amount_documents,
+                        "status" : 200
+                    }
+                    callback(null,data)
+                  });
+                db.close();
+                
+            });       
+            
+            
         },
 
     ],function(err,response){
@@ -41,7 +58,7 @@ var getResult = function(req,res){
         {
             console.log({
                 "Status" : "200",
-                "Message" : response
+                "Response" : response
             });
             return;
         }
