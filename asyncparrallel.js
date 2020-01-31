@@ -1,9 +1,16 @@
 const async = require('async');
 const file  = require('fs');
-
+const express = require('express');
+var request = require('request');
 var MongoClient = require('mongodb').MongoClient;
+var app = express();
+app.listen(3000,()=>{
+    console.log("App started at 3000");
+})
 
-var getResult = function(req,res){
+
+
+var data = function(req,res){
     async.parallel([
         function(callback){
             var emptyArray = [];
@@ -48,21 +55,32 @@ var getResult = function(req,res){
     ],function(err,response){
         if(err)
         {
-            console.log({
+            var data  = {
                "Status" : "203",
                "Message" : "No record found"
-           });
-           return;
+           };
+           return data;
+          
         }
         else
         {
-            console.log({
+            var data = {
                 "Status" : "200",
                 "Response" : response
-            });
-            return;
+            }
+            return res.send(data)
+            
         }
     });
 }
 
-getResult();
+app.use('/asyncParallel',data)
+
+
+
+
+
+
+
+
+
