@@ -1,16 +1,12 @@
 var eventEmitter = require('events');
 
 var evenEmitter = new eventEmitter();
-var data = {
-    "Status" : 1,
-    "data" : "Got response from api"
+data = {
+    "status" : "object to receive"
 }
 
-//Always on top
-//Got the event 
-evenEmitter.on('eventCreated',(response)=>{
-    console.log("New event emitted with data : ",response)
+evenEmitter.on('emit',function(a,b,c,d,dataReceived) {
+    console.log(a);console.log(b);console.log(c);console.log(d);console.log(dataReceived);
 })
 
-//Event emitted
-evenEmitter.emit('eventCreated',data);
+evenEmitter.emit('emit',105,106,106,107,data)

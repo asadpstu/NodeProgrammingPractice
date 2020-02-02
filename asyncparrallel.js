@@ -2,6 +2,9 @@ const async = require('async');
 const file  = require('fs');
 const express = require('express');
 var request = require('request');
+const event = require('events');
+const mypackage = require('fast-binary-search');
+const emitter = new event();
 var MongoClient = require('mongodb').MongoClient;
 var app = express();
 app.listen(3000,()=>{
@@ -9,6 +12,21 @@ app.listen(3000,()=>{
 })
 
 
+// emitter.on('gotResponse',function(req,res,arg){
+//    console.log(arg)
+//     if(arg.Status == 203)
+//    {
+//       console.log("There was an error")
+//    }
+//    if(arg.Status == 200)
+//    {
+//       //var result = mypackage.binarySearch([12,15,20,13,67,21,45],45); 
+//       //arg["binarySearch"] = result;
+//       return res.send(arg);
+
+//     console.log("successfully triggered the functionality")
+//    }
+// });
 
 var data = function(req,res){
     async.parallel([
@@ -56,18 +74,22 @@ var data = function(req,res){
         if(err)
         {
             var data  = {
-               "Status" : "203",
+               "Status" : 203,
                "Message" : "No record found"
            };
-           return data;
+           emitter.emit('gotResponse',data);
+           //return data;
           
         }
         else
         {
             var data = {
-                "Status" : "200",
+                "Status" : 200,
                 "Response" : response
             }
+            var result = mypackage.binarySearch([12,15,20,13,67,21,45],45); 
+            data["binarySearch"] = result;
+            //emitter.emit('gotResponse',data);
             return res.send(data)
             
         }

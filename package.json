@@ -1,7 +1,6 @@
 {
   "name": "interview",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,8 +12,20 @@
     "axios": "^0.19.2",
     "debug": "^4.1.1",
     "express": "^4.17.1",
+    "fast-binary-search": "^1.0.4",
     "got": "^10.3.0",
+    "joi": "^14.3.1",
     "mongodb": "^3.5.2",
     "request": "^2.88.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asadpstu/NodeProgrammingPractice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asadpstu/NodeProgrammingPractice/issues"
+  },
+  "homepage": "https://github.com/asadpstu/NodeProgrammingPractice#readme",
+  "description": ""
 }
