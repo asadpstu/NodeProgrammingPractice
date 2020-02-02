@@ -3,6 +3,8 @@ const Joi = require('joi');
 const app = express();
 app.use(express.json());
 
+
+
 const schema = Joi.object().keys({
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().required(),
