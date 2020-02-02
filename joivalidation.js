@@ -19,9 +19,19 @@ app.get('/joi',function(req,res){
 app.post('/joi',function(req,res){
 
     const joiReturn = Joi.validate(req.body,schema);
-    res.send({
-        "status" : joiReturn
-    });
+
+    if(joiReturn.error){
+        res.status(400).send({
+            "error" : joiReturn
+        });
+    }
+    else
+    {
+        res.status(200).send({
+            "status" : joiReturn
+        });
+    }
+
 })
 
 app.listen(3000,function(){
