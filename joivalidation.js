@@ -19,8 +19,10 @@ app.get('/joi',function(req,res){
 app.post('/joi',function(req,res){
 
     const joiReturn = Joi.validate(req.body,schema);
+    const { error } = Joi.validate(req.body,schema)
 
-    if(joiReturn.error){
+    //{ error } this is  destructor 
+    if(error){
         res.status(400).send({
             "error" : joiReturn
         });
