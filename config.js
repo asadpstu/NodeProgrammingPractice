@@ -2,6 +2,12 @@ const express = require('express');
 var fs = require('fs');
 var morgan = require('morgan')
 const config  = require('config');
+//==============================================================
+const debug = require('debug')('app:debugStatement');
+// {set DEBUG=app:*}   to execute all debug  or 
+// {set DEBUG=app:debugStatement}   to execute sepecific debug
+// to stop debug {set DEBUG=}  from CMD => Admin mode 
+//==============================================================
 var app = express();
 
 // create a write stream (in append mode)
@@ -33,5 +39,6 @@ app.get('/', function (req, res) {
   });
 
 app.listen(3000,()=>{
+    debug("Debug success ...");
     console.log("App config is listening on 3000 port");
 })
