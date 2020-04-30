@@ -59,7 +59,7 @@ var homes = [
 homes.sort(
     function(a, b) {          
        if (a.price === b.price) {
-          // Price is only important when cities are the same
+          // id is only important when price is the same
           return b.id - a.id;
        }
        return b.price > a.price ? 1 : -1;
